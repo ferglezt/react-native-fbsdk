@@ -34,6 +34,7 @@ type AccessTokenMap = {
   accessTokenSource?: string,
   expirationTime: number,
   lastRefreshTime: number,
+  dataAccessExpirationTime: number,
 };
 
 /**
@@ -83,6 +84,11 @@ class FBAccessToken {
    */
   lastRefreshTime: number;
 
+  /**
+   * The time when user data access expires
+   */
+  dataAccessExpirationTime: number;
+
   constructor(tokenMap: AccessTokenMap) {
     this.accessToken = tokenMap.accessToken;
     this.permissions = tokenMap.permissions;
@@ -92,6 +98,7 @@ class FBAccessToken {
     this.userID = tokenMap.userID;
     this.expirationTime = tokenMap.expirationTime;
     this.lastRefreshTime = tokenMap.lastRefreshTime;
+    this.dataAccessExpirationTime = tokenMap.dataAccessExpirationTime;
     Object.freeze(this);
   }
 
@@ -161,6 +168,15 @@ class FBAccessToken {
    */
   getLastRefresh(): number {
     return this.lastRefreshTime;
+  }
+
+  /**
+    * Gets the date at which the acces of user data expires.
+    * The value is the number of milliseconds since
+    * Jan. 1, 1970, midnight GMT.
+    */
+  getDataExpiration() : number {
+    return this.dataAccessExpirationTime;
   }
 
   /**

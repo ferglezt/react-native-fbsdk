@@ -61,6 +61,7 @@ public final class Utility {
                 .valueOf(accessTokenMap.getString("accessTokenSource"));
         Date expirationTime = new Date((long) accessTokenMap.getDouble("expirationTime"));
         Date lastRefreshTime = new Date((long) accessTokenMap.getDouble("lastRefreshTime"));
+        Date dataAccessExpirationTime = new Date((long) accessTokenMap.getDouble("dataAccessExpirationTime"));
         return new AccessToken(
                 accessTokenMap.getString("accessToken"),
                 accessTokenMap.getString("applicationID"),
@@ -70,7 +71,7 @@ public final class Utility {
                 accessTokenSource,
                 expirationTime,
                 lastRefreshTime,
-                null
+                dataAccessExpirationTime
         );
     }
 
